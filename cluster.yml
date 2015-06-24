@@ -1,0 +1,15 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+  - name: Print if in masters
+    debug: msg='In masters!'
+    when: inventory_hostname in {{ groups['masters'] }}
+
+  - name: Print if in nodes
+    debug: msg='In nodes!'
+    when: inventory_hostname in {{ groups['nodes'] }}
+
+  - name: Print if in both
+    debug: msg='In both!'
+    when: inventory_hostname in {{ groups['nodes'] + groups['masters'] }}
